@@ -4,7 +4,8 @@ import (
 	"testing"
 	"bytes"
 	"encoding/hex"
-	"sort"
+	"os"
+	"bufio"
 )
 
 func Test1_1(t *testing.T) {
@@ -35,8 +36,89 @@ func Test1_3(t *testing.T) {
 	input := []byte{0x1b,0x37,0x37,0x33,0x31,0x36,0x3f,0x78,0x15,0x1b,0x7f,0x2b,0x78,0x34,0x31,0x33,0x3d,0x78,0x39,0x78,
 		0x28,0x37,0x2d,0x36,0x3c,0x78,0x37,0x3e,0x78,0x3a,0x39,0x3b,0x37,0x36}
 
-	t.Log(sortedByteDistribution(input))
-	sort.Sort(sort.Reverse(sort.Float64Slice(charFreqs)))
-	t.Log(charFreqs)
+	var lowestChiSquared float64 = 100
+	var candidateAnswer []byte
 
+	for i := 1; i < 255; i++ {
+		try := fixedXor(input, []byte{byte(i)})
+
+		// Optimisation - we assume plaintext is ascii, throw away anything outside that
+		if !isAscii(try) {
+			continue
+		}
+
+		// Optimisation - we only consider alphanumerics when calculating chi-squared. Some punctuation in a plaintext
+		// is expected, but if more than 90% of try is non-alpha, skip it
+		_, ignored := charCounts(try)
+		if float64(ignored) > float64(len(try)) * float64(0.1) {
+			//fmt.Printf("Skipping due to %d ignored chars (threshold %f)\n", ignored, float64(len(try)) * float64(0.1))
+			continue
+		}
+
+		tryChiSquared := chiSquared(try)
+
+		if tryChiSquared < lowestChiSquared {
+			lowestChiSquared = tryChiSquared
+			candidateAnswer = try
+		}
+	}
+
+	if string(candidateAnswer) != "Cooking MC's like a pound of bacon" {
+		t.Errorf("Test failed, got %s", string(candidateAnswer))
+	}
+}
+
+func Test1_4(t *testing.T) {
+	file, err := os.Open("data/4.txt")
+	if err != nil {
+		t.Errorf("Failed to open data/4.txt!")
+	}
+	defer file.Close()
+
+	var lowestChiSquared float64 = 100
+	var candidateAnswer []byte
+
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		candidate, err := hex.DecodeString(scanner.Text())
+		if err != nil {
+			t.Errorf("Failed to convert '%s' to hex string!", scanner.Text())
+		}
+
+		// Optimisation - I don't actually know how the non-plaintext values are generated, but I'm guessing they will
+		// be random. As we can assume the plaintext is ascii and XOR'ed with a fixed repeating value, the top bit of
+		// each byte of the ciphertext should be the same for each byte of ciphertext, and not the same in a random
+		// value.
+		if !isTopBitUniform(candidate) {
+			continue
+		}
+
+		for i := 1; i < 255; i++ {
+			try := fixedXor(candidate, []byte{byte(i)})
+
+			// Optimisation - we assume plaintext is ascii, throw away anything outside that
+			if !isAscii(try) {
+				continue
+			}
+
+			// Optimisation - we only consider alphanumerics when calculating chi-squared. Some punctuation in a plaintext
+			// is expected, but if more than 90% of try is non-alpha, skip it
+			_, ignored := charCounts(try)
+			if float64(ignored) > float64(len(try)) * float64(0.1) {
+				//fmt.Printf("Skipping due to %d ignored chars (threshold %f)\n", ignored, float64(len(try)) * float64(0.1))
+				continue
+			}
+
+			tryChiSquared := chiSquared(try)
+
+			if tryChiSquared < lowestChiSquared {
+				lowestChiSquared = tryChiSquared
+				candidateAnswer = try
+			}
+		}
+	}
+
+	if string(candidateAnswer) != "Now that the party is jumping" {
+		t.Errorf("Test failed, got %s", string(candidateAnswer))
+	}
 }
