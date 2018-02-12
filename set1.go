@@ -17,7 +17,7 @@ func fixedXor(input []byte, key []byte) []byte {
 	res := make([]byte, len(input))
 
 	for i := range input {
-		res[i] = input[i] ^ key[i % len(key)]
+		res[i] = input[i] ^ key[i%len(key)]
 	}
 
 	return res
@@ -34,10 +34,10 @@ func charCounts(input []byte) ([]int, int) {
 			res[26]++
 			break
 		case c >= 'a' && c <= 'z':
-			res[c - 'a']++
+			res[c-'a']++
 			break
 		case c >= 'A' && c <= 'Z':
-			res[c - 'A']++
+			res[c-'A']++
 			break
 		default:
 			ignored++
@@ -53,14 +53,14 @@ func chiSquared(input []byte) float64 {
 	observedCharCounts, _ := charCounts(input)
 
 	if len(expectedCharDistribution) != len(observedCharCounts) {
-		panic("chiSquared calculated wrong count!")
+		panic("chiSquared distribution is the wrong length!")
 	}
 
 	for i := range expectedCharDistribution {
 		expectedCount := expectedCharDistribution[i] * float64(len(input))
 		observedCount := float64(observedCharCounts[i])
 
-		x2 := math.Pow(observedCount - expectedCount, 2) / expectedCount
+		x2 := math.Pow(observedCount-expectedCount, 2) / expectedCount
 
 		if math.IsNaN(x2) {
 			continue
@@ -84,9 +84,63 @@ func isAscii(input []byte) bool {
 func isTopBitUniform(input []byte) bool {
 	topBitVal := input[0] & 0x80
 	for _, c := range input {
-		if c & 0x80 != topBitVal {
+		if c&0x80 != topBitVal {
 			return false
 		}
 	}
 	return true
+}
+
+func breakSingleCharXor(input []byte) []byte {
+	var lowestChiSquared float64 = 100
+	var candidateAnswer []byte
+
+	for i := 1; i < 255; i++ {
+		try := fixedXor(input, []byte{byte(i)})
+
+		// Optimisation - we assume plaintext is ascii, throw away anything outside that
+		if !isAscii(try) {
+			//fmt.Println("Discarding non-ascii try")
+			continue
+		}
+
+		// Optimisation - we only consider alphanumerics when calculating chi-squared. Some punctuation in a plaintext
+		// is expected, but if more than 90% of try is non-alpha, skip it
+		_, ignored := charCounts(try)
+		if float64(ignored) > float64(len(try))*float64(0.1) {
+			//fmt.Printf("Skipping due to %d ignored chars (threshold %f)\n", ignored, float64(len(try)) * float64(0.1))
+			continue
+		}
+
+		tryChiSquared := chiSquared(try)
+
+		if tryChiSquared < lowestChiSquared {
+			lowestChiSquared = tryChiSquared
+			candidateAnswer = try
+		}
+	}
+
+	return candidateAnswer
+}
+
+func hammingDistance(input1, input2 []byte) int {
+	if len(input1) != len(input2) {
+		panic("hammingDistance called with 2 slices of different lengths!")
+	}
+
+	distance := 0
+
+	for i := range input1 {
+		var j, mask byte
+		for j = 0; j < 8; j++ {
+			mask = 1 << j
+
+			if input1[i]&mask != input2[i]&mask {
+				distance += 1
+			}
+		}
+
+	}
+
+	return distance
 }
