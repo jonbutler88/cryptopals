@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="c81b62f9-91fb-48a5-a9f4-e75431a74d05" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/data.go" afterPath="$PROJECT_DIR$/data.go" />
-      <change beforePath="$PROJECT_DIR$/set1.go" afterPath="$PROJECT_DIR$/set1.go" />
       <change beforePath="$PROJECT_DIR$/set1_test.go" afterPath="$PROJECT_DIR$/set1_test.go" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -19,8 +17,8 @@
       <file leaf-file-name="set1.go" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/set1.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1547">
-              <caret line="91" column="1" lean-forward="true" selection-start-line="91" selection-start-column="1" selection-end-line="91" selection-end-column="1" />
+            <state relative-caret-position="1479">
+              <caret line="91" column="1" lean-forward="false" selection-start-line="91" selection-start-column="1" selection-end-line="91" selection-end-column="1" />
               <folding>
                 <element signature="e#20#66#0" expanded="true" />
               </folding>
@@ -31,8 +29,8 @@
       <file leaf-file-name="set1_test.go" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/set1_test.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="469">
-              <caret line="123" column="1" lean-forward="true" selection-start-line="123" selection-start-column="1" selection-end-line="123" selection-end-column="1" />
+            <state relative-caret-position="844">
+              <caret line="145" column="22" lean-forward="true" selection-start-line="145" selection-start-column="22" selection-end-line="145" selection-end-column="22" />
               <folding>
                 <element signature="e#20#81#0" expanded="true" />
               </folding>
@@ -90,8 +88,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -164,34 +162,34 @@
     <option name="remove_strategy" value="false" />
   </component>
   <component name="TestHistory">
-    <history-entry file="go_test_cryptopals - 2018.02.09 at 14h 37m 31s.xml">
+    <history-entry file="go_test_cryptopals - 2018.02.09 at 18h 05m 09s.xml">
       <configuration name="go test cryptopals" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="go_test_cryptopals - 2018.02.09 at 14h 37m 52s.xml">
+    <history-entry file="go_test_cryptopals - 2018.02.09 at 18h 05m 27s.xml">
       <configuration name="go test cryptopals" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="go_test_cryptopals - 2018.02.09 at 14h 39m 08s.xml">
+    <history-entry file="go_test_cryptopals - 2018.02.09 at 18h 05m 41s.xml">
       <configuration name="go test cryptopals" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="go_test_cryptopals - 2018.02.09 at 15h 25m 04s.xml">
+    <history-entry file="go_test_cryptopals - 2018.02.09 at 18h 05m 46s.xml">
       <configuration name="go test cryptopals" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="go_test_cryptopals - 2018.02.09 at 15h 25m 20s.xml">
+    <history-entry file="go_test_cryptopals - 2018.02.09 at 18h 06m 28s.xml">
       <configuration name="go test cryptopals" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="go_test_cryptopals - 2018.02.09 at 15h 26m 58s.xml">
+    <history-entry file="go_test_cryptopals - 2018.02.09 at 18h 07m 22s.xml">
       <configuration name="go test cryptopals" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="go_test_cryptopals - 2018.02.09 at 15h 27m 23s.xml">
+    <history-entry file="go_test_cryptopals - 2018.02.09 at 18h 07m 29s.xml">
       <configuration name="go test cryptopals" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="go_test_cryptopals - 2018.02.09 at 15h 30m 52s.xml">
+    <history-entry file="go_test_cryptopals - 2018.02.09 at 18h 07m 51s.xml">
       <configuration name="go test cryptopals" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="go_test_cryptopals - 2018.02.09 at 15h 31m 03s.xml">
+    <history-entry file="go_test_cryptopals - 2018.02.10 at 18h 10m 23s.xml">
       <configuration name="go test cryptopals" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="go_test_cryptopals - 2018.02.09 at 15h 31m 21s.xml">
+    <history-entry file="go_test_cryptopals - 2018.02.10 at 18h 12m 34s.xml">
       <configuration name="go test cryptopals" configurationId="GoTestRunConfiguration" />
     </history-entry>
   </component>
@@ -204,7 +202,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34846884" sideWeight="0.50208336" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3435843" sideWeight="0.49791667" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3435843" sideWeight="0.49791667" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -233,6 +231,46 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/set1.go">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1479">
+          <caret line="91" column="1" lean-forward="false" selection-start-line="91" selection-start-column="1" selection-end-line="91" selection-end-column="1" />
+          <folding>
+            <element signature="e#20#66#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/set1_test.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2295">
+          <caret line="141" column="0" lean-forward="false" selection-start-line="141" selection-start-column="0" selection-end-line="141" selection-end-column="0" />
+          <folding>
+            <element signature="e#20#81#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/set1.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1479">
+          <caret line="91" column="1" lean-forward="true" selection-start-line="91" selection-start-column="1" selection-end-line="91" selection-end-column="1" />
+          <folding>
+            <element signature="e#20#66#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/set1_test.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1530">
+          <caret line="96" column="31" lean-forward="true" selection-start-line="96" selection-start-column="31" selection-end-line="96" selection-end-column="31" />
+          <folding>
+            <element signature="e#20#81#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/set1.go">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="833">
           <caret line="53" column="4" lean-forward="false" selection-start-line="53" selection-start-column="4" selection-end-line="53" selection-end-column="51" />
           <folding>
@@ -255,7 +293,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" column="47" lean-forward="true" selection-start-line="8" selection-start-column="47" selection-end-line="8" selection-end-column="47" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -283,7 +320,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -301,7 +337,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="2" column="14" lean-forward="false" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -359,14 +394,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="9" column="52" lean-forward="false" selection-start-line="9" selection-start-column="52" selection-end-line="9" selection-end-column="52" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/set1.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1547">
-          <caret line="91" column="1" lean-forward="true" selection-start-line="91" selection-start-column="1" selection-end-line="91" selection-end-column="1" />
+        <state relative-caret-position="1479">
+          <caret line="91" column="1" lean-forward="false" selection-start-line="91" selection-start-column="1" selection-end-line="91" selection-end-column="1" />
           <folding>
             <element signature="e#20#66#0" expanded="true" />
           </folding>
@@ -375,8 +409,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/set1_test.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="469">
-          <caret line="123" column="1" lean-forward="true" selection-start-line="123" selection-start-column="1" selection-end-line="123" selection-end-column="1" />
+        <state relative-caret-position="844">
+          <caret line="145" column="22" lean-forward="true" selection-start-line="145" selection-start-column="22" selection-end-line="145" selection-end-column="22" />
           <folding>
             <element signature="e#20#81#0" expanded="true" />
           </folding>
