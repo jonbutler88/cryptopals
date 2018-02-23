@@ -3,14 +3,13 @@ package cryptopals
 import (
 	"bufio"
 	"bytes"
-	"encoding/base64"
+	"crypto/aes"
 	"encoding/hex"
 	"os"
-	"strings"
 	"testing"
 )
 
-func Test1_1(t *testing.T) {
+func Test1(t *testing.T) {
 	input := []byte{
 		0x49, 0x27, 0x6d, 0x20, 0x6b, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x20, 0x79, 0x6f, 0x75, 0x72, 0x20, 0x62, 0x72,
 		0x61, 0x69, 0x6e, 0x20, 0x6c, 0x69, 0x6b, 0x65, 0x20, 0x61, 0x20, 0x70, 0x6f, 0x69, 0x73, 0x6f, 0x6e, 0x6f, 0x75,
@@ -23,7 +22,7 @@ func Test1_1(t *testing.T) {
 	}
 }
 
-func Test1_2(t *testing.T) {
+func Test2(t *testing.T) {
 	input := []byte{0x1c, 0x01, 0x11, 0x00, 0x1f, 0x01, 0x01, 0x00, 0x06, 0x1a, 0x02, 0x4b, 0x53, 0x53, 0x50, 0x09, 0x18, 0x1c}
 	key := []byte{0x68, 0x69, 0x74, 0x20, 0x74, 0x68, 0x65, 0x20, 0x62, 0x75, 0x6c, 0x6c, 0x27, 0x73, 0x20, 0x65, 0x79, 0x65}
 
@@ -34,7 +33,7 @@ func Test1_2(t *testing.T) {
 	}
 }
 
-func Test1_3(t *testing.T) {
+func Test3(t *testing.T) {
 	input := []byte{0x1b, 0x37, 0x37, 0x33, 0x31, 0x36, 0x3f, 0x78, 0x15, 0x1b, 0x7f, 0x2b, 0x78, 0x34, 0x31, 0x33, 0x3d, 0x78, 0x39, 0x78,
 		0x28, 0x37, 0x2d, 0x36, 0x3c, 0x78, 0x37, 0x3e, 0x78, 0x3a, 0x39, 0x3b, 0x37, 0x36}
 
@@ -45,7 +44,7 @@ func Test1_3(t *testing.T) {
 	}
 }
 
-func Test1_4(t *testing.T) {
+func Test4(t *testing.T) {
 	file, err := os.Open("data/4.txt")
 	if err != nil {
 		t.Errorf("Failed to open data/4.txt!")
@@ -101,7 +100,7 @@ func Test1_4(t *testing.T) {
 	}
 }
 
-func Test1_5(t *testing.T) {
+func Test5(t *testing.T) {
 	input := []byte("Burning 'em, if you ain't quick and nimble\nI go crazy when I hear a cymbal")
 	key := []byte("ICE")
 
@@ -116,22 +115,10 @@ func Test1_5(t *testing.T) {
 	}
 }
 
-func Test1_6(t *testing.T) {
-	file, err := os.Open("data/6.txt")
+func Test6(t *testing.T) {
+	ciphertext, err := readBase64File("data/6.txt")
 	if err != nil {
-		t.Errorf("Failed to open data/6.txt!")
-	}
-	defer file.Close()
-
-	base64Ciphertext := ""
-	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		base64Ciphertext += strings.TrimSpace(scanner.Text())
-	}
-
-	ciphertext, err := base64.StdEncoding.DecodeString(base64Ciphertext)
-	if err != nil {
-		t.Errorf("Error decoding ciphertext")
+		t.Errorf("Error reading input")
 	}
 
 	// Find the key size. Split the ciphertext into blocks of key size and calculate the hamming distance between them
@@ -188,6 +175,55 @@ func Test1_6(t *testing.T) {
 	}
 }
 
-func Test1_7(t *testing.T) {
+func Test7(t *testing.T) {
+	ciphertext, err := readBase64File("data/7.txt")
+	if err != nil {
+		t.Errorf("Error reading input")
+	}
 
+	result := make([]byte, len(ciphertext))
+
+	key := []byte("YELLOW SUBMARINE")
+	block, _ := aes.NewCipher(key)
+
+	for i := 0; i < len(ciphertext); i += len(key) {
+		block.Decrypt(result[i:i+len(key)], ciphertext[i:i+len(key)])
+	}
+
+	if bytes.Compare(result[0:33], []byte("I'm back and I'm ringin' the bell")) != 0 {
+		t.Errorf("Test failed, got: %s", string(result[0:33]))
+	}
+}
+
+func Test8(t *testing.T) {
+	file, err := os.Open("data/8.txt")
+	if err != nil {
+		t.Errorf("Failed to open data/4.txt!")
+	}
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		candidate, err := hex.DecodeString(scanner.Text())
+		if err != nil {
+			t.Errorf("Failed to convert '%s' to hex string!", scanner.Text())
+		}
+
+		for i := 0; i < len(candidate); i += 16 {
+			block := candidate[i : i+16]
+			for j := 0; j < len(candidate); j += 16 {
+				// Skip comparing with ourselves
+				if i == j {
+					continue
+				}
+
+				if bytes.Compare(block, candidate[j:j+16]) == 0 {
+					//fmt.Println("Detected ECB mode!")
+					return
+				}
+			}
+		}
+	}
+
+	t.Errorf("Did not detect ECB mode :(")
 }
