@@ -74,7 +74,7 @@ func chiSquared(input []byte) float64 {
 
 func isAscii(input []byte) bool {
 	for _, c := range input {
-		if c >= 0x7f {
+		if c > 0x7f {
 			return false
 		}
 	}
@@ -91,9 +91,10 @@ func isTopBitUniform(input []byte) bool {
 	return true
 }
 
-func breakSingleCharXor(input []byte) []byte {
+func breakSingleCharXor(input []byte) ([]byte, byte) {
 	var lowestChiSquared float64 = 100
 	var candidateAnswer []byte
+	var candidateKey byte
 
 	for i := 1; i < 255; i++ {
 		try := fixedXor(input, []byte{byte(i)})
@@ -105,9 +106,9 @@ func breakSingleCharXor(input []byte) []byte {
 		}
 
 		// Optimisation - we only consider alphanumerics when calculating chi-squared. Some punctuation in a plaintext
-		// is expected, but if more than 90% of try is non-alpha, skip it
+		// is expected, but if more than 85% of try is non-alpha, skip it
 		_, ignored := charCounts(try)
-		if float64(ignored) > float64(len(try))*float64(0.1) {
+		if float64(ignored) > float64(len(try))*float64(0.15) {
 			//fmt.Printf("Skipping due to %d ignored chars (threshold %f)\n", ignored, float64(len(try)) * float64(0.1))
 			continue
 		}
@@ -117,10 +118,11 @@ func breakSingleCharXor(input []byte) []byte {
 		if tryChiSquared < lowestChiSquared {
 			lowestChiSquared = tryChiSquared
 			candidateAnswer = try
+			candidateKey = byte(i)
 		}
 	}
 
-	return candidateAnswer
+	return candidateAnswer, candidateKey
 }
 
 func hammingDistance(input1, input2 []byte) int {

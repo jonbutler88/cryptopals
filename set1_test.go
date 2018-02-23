@@ -5,7 +5,6 @@ import (
 	"bytes"
 	"encoding/base64"
 	"encoding/hex"
-	"fmt"
 	"os"
 	"strings"
 	"testing"
@@ -39,7 +38,7 @@ func Test1_3(t *testing.T) {
 	input := []byte{0x1b, 0x37, 0x37, 0x33, 0x31, 0x36, 0x3f, 0x78, 0x15, 0x1b, 0x7f, 0x2b, 0x78, 0x34, 0x31, 0x33, 0x3d, 0x78, 0x39, 0x78,
 		0x28, 0x37, 0x2d, 0x36, 0x3c, 0x78, 0x37, 0x3e, 0x78, 0x3a, 0x39, 0x3b, 0x37, 0x36}
 
-	candidateAnswer := breakSingleCharXor(input)
+	candidateAnswer, _ := breakSingleCharXor(input)
 
 	if string(candidateAnswer) != "Cooking MC's like a pound of bacon" {
 		t.Errorf("Test failed, got %s", string(candidateAnswer))
@@ -159,7 +158,7 @@ func Test1_6(t *testing.T) {
 		}
 	}
 
-	fmt.Printf("The likely key size is %d\n", keySize)
+	//fmt.Printf("The likely key size is %d\n", keySize)
 
 	// Transpose the blocks based on the key size
 	blocks := make([][]byte, keySize)
@@ -173,8 +172,22 @@ func Test1_6(t *testing.T) {
 		}
 	}
 
+	var recoveredKey []byte
 	for i := range blocks {
-		//fmt.Println(blocks[i])
-		fmt.Println(string(breakSingleCharXor(blocks[i])))
+		_, key := breakSingleCharXor(blocks[i])
+		recoveredKey = append(recoveredKey, key)
 	}
+
+	//fmt.Printf("The recovered key is: %s\n", recoveredKey)
+
+	// Now, decrypt the ciphertext
+	//fmt.Println(string(fixedXor(ciphertext, recoveredKey)))
+
+	if bytes.Compare(recoveredKey, []byte("Terminator X: Bring the noise")) != 0 {
+		t.Errorf("Test failed, got: %s", string(recoveredKey))
+	}
+}
+
+func Test1_7(t *testing.T) {
+
 }
